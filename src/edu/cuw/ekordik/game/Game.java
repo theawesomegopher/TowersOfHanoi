@@ -102,13 +102,10 @@ public class Game {
 					+ " stack. It is not a stack. Choose 1, 2, or 3");
 		}
 		
-		try{
-			int disc = this.stacks[fromStack-1].peek();
-			if(this.stacks[destinationStack-1].peek() < disc) {
-				throw new InvalidMoveException("Invalid Move. " + this.stacks[destinationStack-1].peek() + " is less than " + disc);
-			}
-		}catch(EmptyStackException ese) {
-			//Can move to an empty stack so we ignore this.
+	
+		if(!this.stacks[destinationStack-1].empty() && !this.stacks[fromStack-1].empty() &&
+				this.stacks[destinationStack-1].peek() < this.stacks[fromStack-1].peek()) {
+			throw new InvalidMoveException("Invalid Move. " + this.stacks[destinationStack-1].peek() + " is less than " + this.stacks[fromStack-1].peek());
 		}
 		
 		this.stacks[destinationStack-1].push(this.stacks[fromStack-1].pop());
